@@ -20,6 +20,9 @@ def git_handler(args: argparse.Namespace):
 def logs_handler(args: argparse.Namespace):
     pass
 
+def deploy_handler(args: argparse.Namespace):
+    pass
+
 
 if __name__ == '__main__':
-    print()
+    pass
