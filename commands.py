@@ -10,6 +10,7 @@ SERVER_RESTART = 'restart'
 GIT_INFO = 'git'
 SERVER_HEARTBEAT = 'heartbeat'
 SERVER_LOGS = 'log'
+DEPLOY = 'deploy'
 
 
 '''
@@ -22,3 +23,4 @@ ALIAS_SERVER_RESTART = 'r'
 ALIAS_GIT_INFO = 'g'
 ALIAS_SERVER_HEARTBEAT = 'hb'
 ALIAS_SERVER_LOGS = 'l'
+ALIAS_DEPLOY = 'd'
