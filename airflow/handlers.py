@@ -51,8 +51,17 @@ def stop_handler(args: argparse.Namespace):
     stop_server(pid)
 
 
+'''
+    This method handles restart of a server instance.
+    The handler initially tries to shut-down the server
+    blindly and then tries to bring it up again.
+'''
 def restart_handler(args: argparse.Namespace):
-    pass
+    try:
+        stop_handler(args)
+    except Exception as e:
+        print(e)
+    start_handler(args)
 
 
 '''
