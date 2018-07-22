@@ -10,11 +10,13 @@ import argparse
 
 from os_utils import (
     get_instance_dir,
+    get_instance_log_dir,
     get_git_branch_name,
     get_git_branch_owner,
     get_instance_port,
     get_pid_from_port,
-    stop_server
+    stop_server,
+    display_logs
 )
 
 from os_commands import (
@@ -67,8 +69,14 @@ def git_handler(args: argparse.Namespace):
     print('Owner of the branch : ' + get_git_branch_owner(owner_name_path))
 
 
+'''
+    This method is responsible for handling display
+    of logs for the requested server.
+'''
 def logs_handler(args: argparse.Namespace):
-    pass
+    server_name = getattr(args, 'server_name')
+    instance_log_dir = get_instance_log_dir(server_name)
+    display_logs(instance_log_dir)
 
 
 def deploy_handler(args: argparse.Namespace):

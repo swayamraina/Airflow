@@ -6,10 +6,12 @@
 
 
 import subprocess
+import os
 
 from config import (
     INSTANCES,
     INSTANCE_DIRS,
+    INSTANCE_LOG_DIRS,
     SERVER_PORT_KEY
 )
 
@@ -26,7 +28,8 @@ from utils import (
 )
 
 from os_commands import (
-    EXIT_PROCESS
+    EXIT_PROCESS,
+    PRINT_LOGS
 )
 
 
@@ -69,3 +72,14 @@ def stop_server(pid):
     status = out.decode( UTF8 )
     # TODO : complete this
     return status
+    
+def get_instance_log_dir(instance):
+    index = 0
+    for temp_instance in INSTANCES:
+        if temp_instance == instance:
+            return INSTANCE_LOG_DIRS[index]
+        index = index + 1
+    raise ValueError('Incorrect instance name specified!')
+
+def display_logs(path):
+    os.system(PRINT_LOGS.format(path))
