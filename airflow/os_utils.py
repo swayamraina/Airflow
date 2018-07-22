@@ -1,5 +1,5 @@
 
-# This file contains all the utility methods that 
+# This file contains all the utility methods that
 # handle OS level calls made by 'airflow'.
 #
 # @author  Swayam Raina
@@ -24,7 +24,8 @@ from utils import (
     ANGULAR_START,
     ANGULAR_END,
     FORWARD_SLASH,
-    UTF8
+    UTF8,
+    EQUALS
 )
 
 from os_commands import (
@@ -57,8 +58,10 @@ def get_git_branch_owner(path):
 def get_instance_port(path):
     app = open(path, 'r')
     for line in app:
-        if SERVER_PORT_KEY == line.strip():
-            return extract_port(line)
+        index = line.find( EQUALS )
+        key = line[ : index]
+        if SERVER_PORT_KEY == key:
+            return extract_port(line, index+1)
     raise ValueError('Unable to get server port!')
 
 def get_pid_from_port(port):
@@ -72,7 +75,7 @@ def stop_server(pid):
     status = out.decode( UTF8 )
     # TODO : complete this
     return status
-    
+
 def get_instance_log_dir(instance):
     index = 0
     for temp_instance in INSTANCES:

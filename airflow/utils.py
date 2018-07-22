@@ -18,6 +18,5 @@ def extract_branch_name(content, index):
         return content[index+1 : -1]
     return content[index+1 : ]
 
-def extract_port(key_value_property):
-    index = key_value_property.find( EQUALS )
-    return key_value_property[ index+1 : ]
+def extract_port(key_value_property, index):
+    return key_value_property[ index : ]
