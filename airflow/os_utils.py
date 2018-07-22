@@ -17,7 +17,9 @@ from config import (
 
 from utils import (
     extract_branch_name,
-    extract_port
+    extract_port_from_file,
+    extract_port_from_query_result,
+    get_system_pid_query
 )
 
 from utils import (
@@ -61,20 +63,20 @@ def get_instance_port(path):
         index = line.find( EQUALS )
         key = line[ : index]
         if SERVER_PORT_KEY == key:
-            return extract_port(line, index+1)
+            return extract_port_from_file(line, index)
     raise ValueError('Unable to get server port!')
 
 def get_pid_from_port(port):
-    out = subprocess.check_output(['netstat', '-nltp', port])
+    query = get_system_pid_query(port)
+    # special handling for 'pipe' operation
+    ps = subprocess.Popen(query, stdout=subprocess.PIPE)
+    out = subprocess.check_output(['grep', port], stdin=ps.stdout)
     content = out.decode( UTF8 )
-    # TODO : complete this
-    return content
+    pid = extract_port_from_query_result(content)
+    return pid
 
 def stop_server(pid):
-    out = subprocess.check_output(EXIT_PROCESS.format(pid))
-    status = out.decode( UTF8 )
-    # TODO : complete this
-    return status
+    subprocess.check_output(['kill', '-9', pid])
 
 def get_instance_log_dir(instance):
     index = 0

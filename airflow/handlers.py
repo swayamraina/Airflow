@@ -48,8 +48,8 @@ def stop_handler(args: argparse.Namespace):
     application_properties_path = instance_dir +  FORWARD_SLASH + SERVER_PORT_FILEPATH
     instance_port = get_instance_port(application_properties_path)
     pid = get_pid_from_port(instance_port)
-    status = stop_server(pid)
-    print(status)
+    stop_server(pid)
+
 
 def restart_handler(args: argparse.Namespace):
     pass
