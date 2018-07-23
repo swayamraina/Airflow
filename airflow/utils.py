@@ -45,6 +45,17 @@ def get_system_pid_query(port):
     return MAC_PID_SEARCH_QUERY
 
 def extract_port_from_query_result(content):
+    machine_type = get_machine_details()
+    start_index = 0
+    found = False
+    if is_linux_machine(machine_type):
+        for i in range(len(content)):
+            if not found and content[i].isnumeric():
+                start_index = i
+                found = True
+            elif found and not content[i].isnumeric():
+                return content[ start_index : i ]
+    # handling for MacOS
     start_index = content.find( SPACE )
     content = content[start_index+1 : ]
     end_index = content.find( SPACE )
