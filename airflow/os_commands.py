@@ -18,3 +18,5 @@ GIT_LOG_FILE_PATH = '.git/logs/HEAD'
 '''
 LINUX_PID_SEARCH_QUERY = ['netstat', '-nltp']
 MAC_PID_SEARCH_QUERY = ['lsof', '-i', 'tcp:{0}']
+
+PRINT_LOGS = 'tail -f {0}'
