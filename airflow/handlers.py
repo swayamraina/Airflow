@@ -34,7 +34,7 @@ from utils import (
 )
 
 def heartbeat_handler(args: argparse.Namespace):
-    pass
+    raise ValueError('not yet implemented!')
 
 
 '''
@@ -98,7 +98,7 @@ def logs_handler(args: argparse.Namespace):
 
 
 def deploy_handler(args: argparse.Namespace):
-    pass
+    raise ValueError('not yet implemented!')
 
 
 if __name__ == '__main__':
