@@ -16,6 +16,7 @@ from os_utils import (
     get_instance_port,
     get_pid_from_port,
     stop_server,
+    start_server,
     display_logs
 )
 
@@ -35,8 +36,16 @@ from utils import (
 def heartbeat_handler(args: argparse.Namespace):
     pass
 
+
+'''
+    This method is responsible for starting a 
+    specific server. 
+'''
 def start_handler(args: argparse.Namespace):
-    pass
+    server_name = getattr(args, 'server_name')
+    instance_dir = get_instance_dir(server_name)
+    start_server(instance_dir)
+
 
 '''
     This method is responsible for shutting down a 

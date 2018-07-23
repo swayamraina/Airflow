@@ -12,7 +12,10 @@ from config import (
     INSTANCES,
     INSTANCE_DIRS,
     INSTANCE_LOG_DIRS,
-    SERVER_PORT_KEY
+    SERVER_PORT_KEY,
+    GRADLE_TASK,
+    ENVIRONMENT,
+    MACHINE_IP
 )
 
 from utils import (
@@ -31,7 +34,6 @@ from utils import (
 )
 
 from os_commands import (
-    EXIT_PROCESS,
     PRINT_LOGS
 )
 
@@ -88,3 +90,8 @@ def get_instance_log_dir(instance):
 
 def display_logs(path):
     os.system(PRINT_LOGS.format(path))
+
+def start_server(path):
+    subprocess.check_output(['nohup', 'gradle', '-p', path, '-q', GRADLE_TASK, 
+                             '-Denv={0}'.format( ENVIRONMENT ), 
+                             '-Djmxhost={0}'.format( MACHINE_IP ), '&'])
