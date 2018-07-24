@@ -40,7 +40,7 @@ from utils import (
     if the server is successfully accepting HTTP requests
     after server has successfully started
 '''
-def heartbeat_handler(args: argparse.Namespace):
+def heartbeat_handler(args):
     server_name = getattr(args, 'server_name')
     instance_dir = get_instance_dir(server_name)
     application_properties_path = instance_dir +  FORWARD_SLASH + SERVER_PORT_FILEPATH
@@ -52,7 +52,7 @@ def heartbeat_handler(args: argparse.Namespace):
     This method is responsible for starting a 
     specific server. 
 '''
-def start_handler(args: argparse.Namespace):
+def start_handler(args):
     server_name = getattr(args, 'server_name')
     instance_dir = get_instance_dir(server_name)
     start_server(instance_dir)
@@ -62,7 +62,7 @@ def start_handler(args: argparse.Namespace):
     This method is responsible for shutting down a 
     specific server. 
 '''
-def stop_handler(args: argparse.Namespace):
+def stop_handler(args):
     server_name = getattr(args, 'server_name')
     instance_dir = get_instance_dir(server_name)
     application_properties_path = instance_dir +  FORWARD_SLASH + SERVER_PORT_FILEPATH
@@ -76,7 +76,7 @@ def stop_handler(args: argparse.Namespace):
     The handler initially tries to shut-down the server
     blindly and then tries to bring it up again.
 '''
-def restart_handler(args: argparse.Namespace):
+def restart_handler(args):
     try:
         stop_handler(args)
     except Exception as e:
@@ -89,7 +89,7 @@ def restart_handler(args: argparse.Namespace):
     the branch deployed on the instance and the owner of
     the branch.
 '''
-def git_handler(args: argparse.Namespace):
+def git_handler(args):
     server_name = getattr(args, 'server_name')
     instance_dir = get_instance_dir(server_name)
     branch_name_path = instance_dir +  FORWARD_SLASH + GIT_BRANCH_FILE_PATH
@@ -102,13 +102,13 @@ def git_handler(args: argparse.Namespace):
     This method is responsible for handling display
     of logs for the requested server.
 '''
-def logs_handler(args: argparse.Namespace):
+def logs_handler(args):
     server_name = getattr(args, 'server_name')
     instance_log_dir = get_instance_log_dir(server_name)
     display_logs(instance_log_dir)
 
 
-def deploy_handler(args: argparse.Namespace):
+def deploy_handler(args):
     raise ValueError('not yet implemented!')
 
 

@@ -7,7 +7,7 @@
 
 import subprocess
 import os
-import urllib.request
+
 
 from config import (
     INSTANCES,
@@ -24,7 +24,8 @@ from utils import (
     extract_branch_name,
     extract_port_from_file,
     extract_port_from_query_result,
-    get_system_pid_query
+    get_system_pid_query,
+    is_python_2
 )
 
 from utils import (
@@ -101,7 +102,12 @@ def start_server(path):
 def pulse_check(port):
     try:
         request_url = 'http//{0}:{1}/{2}'.format(MACHINE_IP, port, HEARTBEAT_API)
-        response = urllib.request.urlopen(request_url).read()
+        if is_python_2():
+            import urllib
+            response = urllib.urlopen(request_url).read()
+        else:
+            import urllib.request
+            response = urllib.request.urlopen(request_url).read()
         print(response)
     except Exception as e:
         print(e)

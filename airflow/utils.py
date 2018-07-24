@@ -62,7 +62,10 @@ def extract_port_from_query_result(content):
     end_index = content.find( SPACE )
     return content[ : end_index]
 
+def is_python_2():
+    return sys.version_info[0] == 2
+
 def create_parser(sub_parser, command, alias):
-    if sys.version_info[0] == 3:
-        return sub_parser.add_parser(command, aliases = alias)
-    return sub_parser.add_parser(command)
+    if is_python_2():
+        return sub_parser.add_parser(command)
+    return sub_parser.add_parser(command, aliases = alias)
