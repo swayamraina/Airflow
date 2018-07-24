@@ -28,7 +28,7 @@ def extract_branch_name(content, index):
     return content[index+1 : ]
 
 def extract_port_from_file(key_value_property, index):
-    return key_value_property[ index+1 : ]
+    return key_value_property[ index+1 : ].strip()
 
 def get_machine_details():
     encoded_name = subprocess.check_output('uname')
