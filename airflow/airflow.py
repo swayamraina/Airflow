@@ -34,56 +34,39 @@ from commands import (
     ALIAS_DEPLOY
 )
 
+from utils import (
+    create_parser
+)
+
 def init():
     airflow = argparse.ArgumentParser()
-    commands = airflow.add_subparsers()
+    sub_parser = airflow.add_subparsers()
 
-    heartbeat_parser = commands.add_parser(
-        SERVER_HEARTBEAT,
-        aliases = [ ALIAS_SERVER_HEARTBEAT ] 
-    )
+    heartbeat_parser = create_parser(sub_parser, SERVER_HEARTBEAT, ALIAS_SERVER_HEARTBEAT)
     heartbeat_parser.add_argument('server_name')
     heartbeat_parser.set_defaults(handler = heartbeat_handler)
 
-    start_parser = commands.add_parser(
-        SERVER_START,
-        aliases = [ ALIAS_SERVER_START ]
-    )
+    start_parser = create_parser(sub_parser, SERVER_START, ALIAS_SERVER_START)
     start_parser.add_argument('server_name')
     start_parser.set_defaults(handler = start_handler)
 
-    stop_parser = commands.add_parser(
-        SERVER_STOP,
-        aliases = [ ALIAS_SERVER_STOP ]
-    )
+    stop_parser = create_parser(sub_parser, SERVER_STOP, ALIAS_SERVER_STOP)
     stop_parser.add_argument('server_name')
     stop_parser.set_defaults(handler = stop_handler)
 
-    restart_parser = commands.add_parser(
-        SERVER_RESTART,
-        aliases = [ ALIAS_SERVER_RESTART ]
-    )
+    restart_parser = create_parser(sub_parser, SERVER_RESTART, ALIAS_SERVER_RESTART)
     restart_parser.add_argument('server_name')
     restart_parser.set_defaults(handler = restart_handler)
 
-    logs_parser = commands.add_parser(
-        SERVER_LOGS,
-        aliases = [ ALIAS_SERVER_LOGS ]
-    )
+    logs_parser = create_parser(sub_parser, SERVER_LOGS, ALIAS_SERVER_LOGS)
     logs_parser.add_argument('server_name')
     logs_parser.set_defaults(handler = logs_handler)
 
-    git_parser = commands.add_parser(
-        GIT_INFO,
-        aliases = [ ALIAS_GIT_INFO ]
-    )
+    git_parser = create_parser(sub_parser, GIT_INFO, ALIAS_GIT_INFO)
     git_parser.add_argument('server_name')
     git_parser.set_defaults(handler = git_handler)
 
-    deploy_parser = commands.add_parser(
-        DEPLOY,
-        aliases = [ ALIAS_DEPLOY ]
-    )
+    deploy_parser = create_parser(sub_parser, DEPLOY, ALIAS_DEPLOY)
     deploy_parser.add_argument('branch_name')
     deploy_parser.set_defaults(handler = deploy_handler)
 

@@ -6,6 +6,7 @@
 # @author  Swayam Raina
 
 
+import sys
 import subprocess
 
 from os_commands import (
@@ -60,3 +61,8 @@ def extract_port_from_query_result(content):
     content = content[start_index+1 : ]
     end_index = content.find( SPACE )
     return content[ : end_index]
+
+def create_parser(sub_parser, command, alias):
+    if sys.version_info[0] == 3:
+        return sub_parser.add_parser(command, aliases = alias)
+    return sub_parser.add_parser(command)
