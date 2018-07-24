@@ -17,7 +17,8 @@ from os_utils import (
     get_pid_from_port,
     stop_server,
     start_server,
-    display_logs
+    display_logs,
+    pulse_check
 )
 
 from os_commands import (
@@ -33,8 +34,18 @@ from utils import (
     FORWARD_SLASH
 )
 
+
+'''
+    This particular method is responsible for checking 
+    if the server is successfully accepting HTTP requests
+    after server has successfully started
+'''
 def heartbeat_handler(args: argparse.Namespace):
-    raise ValueError('not yet implemented!')
+    server_name = getattr(args, 'server_name')
+    instance_dir = get_instance_dir(server_name)
+    application_properties_path = instance_dir +  FORWARD_SLASH + SERVER_PORT_FILEPATH
+    instance_port = get_instance_port(application_properties_path)
+    pulse_check(instance_port)
 
 
 '''

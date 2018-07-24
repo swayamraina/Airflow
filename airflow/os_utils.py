@@ -7,6 +7,7 @@
 
 import subprocess
 import os
+import urllib.request
 
 from config import (
     INSTANCES,
@@ -15,7 +16,8 @@ from config import (
     SERVER_PORT_KEY,
     GRADLE_TASK,
     ENVIRONMENT,
-    MACHINE_IP
+    MACHINE_IP,
+    HEARTBEAT_API
 )
 
 from utils import (
@@ -95,3 +97,11 @@ def start_server(path):
     subprocess.check_output(['nohup', 'gradle', '-p', path, '-q', GRADLE_TASK, 
                              '-Denv={0}'.format( ENVIRONMENT ), 
                              '-Djmxhost={0}'.format( MACHINE_IP ), '&'])
+
+def pulse_check(port):
+    try:
+        request_url = 'http//{0}:{1}/{2}'.format(MACHINE_IP, port, HEARTBEAT_API)
+        response = urllib.request.urlopen(request_url).read()
+        print(response)
+    except Exception as e:
+        print(e)
