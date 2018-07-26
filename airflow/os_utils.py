@@ -115,20 +115,33 @@ def pulse_check(port):
     except Exception as e:
         print(e)
 
-def stash_changes(path):
+def stash_changes(path, display_logs):
     GIT_STASH[2] = GIT_STASH[2].format(path)
     out = subprocess.check_output(GIT_STASH)
-    print(out.decode(UTF8))
+    if display_logs: print(out.decode(UTF8))
 
 def checkout_branch(path, branch):
-    pass
+    success = False
+    GIT_CHECKOUT[2] = GIT_CHECKOUT[2].format(path)
+    GIT_CHECKOUT[4] = GIT_CHECKOUT[4].format(branch)
+    try:
+        subprocess.check_output(GIT_CHECKOUT)
+        success = True
+    except Exception:
+        print('No such branch exists. \nPlease check the branch name!\n')
+        apply_stash(path, False)
+    return success
 
-def apply_stash(path):
+def apply_stash(path, display_logs):
     GIT_POP[2] = GIT_POP[2].format(path)
-    out = subprocess.check_output(GIT_POP)
-    print(out.decode(UTF8))
+    try:
+        out = subprocess.check_output(GIT_POP)
+        if display_logs: print(out.decode(UTF8))
+    except:
+        print('Oops! Something went wrong. Please run the below query on project directory')
+        print('git stash pop')
 
 def deploy_branch(path, branch):
-    stash_changes(path)
-    checkout_branch(path, branch)
-    apply_stash(path)
+    stash_changes(path, True)
+    success = checkout_branch(path, branch)
+    if success: apply_stash(path, True)
