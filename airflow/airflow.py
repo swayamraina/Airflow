@@ -68,6 +68,7 @@ def init():
 
     deploy_parser = create_parser(sub_parser, DEPLOY, ALIAS_DEPLOY)
     deploy_parser.add_argument('branch_name')
+    deploy_parser.add_argument('server_name')
     deploy_parser.set_defaults(handler = deploy_handler)
 
     return airflow
