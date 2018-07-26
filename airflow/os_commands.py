@@ -11,6 +11,9 @@
 GIT_BRANCH_FILE_PATH = '.git/HEAD'
 GIT_LOG_FILE_PATH = '.git/logs/HEAD'
 
+GIT_STASH = ['git', '-C' , '{0}', 'stash']
+GIT_CHECKOUT = ['git', '-C', 'checkout', '{0}']
+GIT_POP = ['git', '-C', '{0}', 'stash', 'pop']
 
 
 '''
