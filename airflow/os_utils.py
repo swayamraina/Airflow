@@ -37,7 +37,10 @@ from utils import (
 )
 
 from os_commands import (
-    PRINT_LOGS
+    PRINT_LOGS,
+    GIT_STASH,
+    GIT_CHECKOUT,
+    GIT_POP
 )
 
 
@@ -111,3 +114,21 @@ def pulse_check(port):
         print(response)
     except Exception as e:
         print(e)
+
+def stash_changes(path):
+    GIT_STASH[2] = GIT_STASH[2].format(path)
+    out = subprocess.check_output(GIT_STASH)
+    print(out.decode(UTF8))
+
+def checkout_branch(path, branch):
+    pass
+
+def apply_stash(path):
+    GIT_POP[2] = GIT_POP[2].format(path)
+    out = subprocess.check_output(GIT_POP)
+    print(out.decode(UTF8))
+
+def deploy_branch(path, branch):
+    stash_changes(path)
+    checkout_branch(path, branch)
+    apply_stash(path)

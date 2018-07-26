@@ -18,7 +18,8 @@ from os_utils import (
     stop_server,
     start_server,
     display_logs,
-    pulse_check
+    pulse_check,
+    deploy_branch
 )
 
 from os_commands import (
@@ -108,8 +109,17 @@ def logs_handler(args):
     display_logs(instance_log_dir)
 
 
+'''
+    This method cleanly deploys the requested branch on the 
+    requested server. 
+'''
 def deploy_handler(args):
-    raise ValueError('not yet implemented!')
+    #stop_handler(args)
+    server_name = getattr(args, 'server_name')
+    branch_name = getattr(args, 'branch_name')
+    instance_dir = get_instance_dir(server_name)
+    deploy_branch(instance_dir, branch_name)
+    #start_handler(args)
 
 
 if __name__ == '__main__':
