@@ -73,7 +73,7 @@ def get_system_pid_query(port):
 '''
     Utility method to extract PID from port info.
 '''
-def extract_port_from_query_result(content):
+def extract_pid_from_query_result(content):
     machine_type = get_machine_details()
     start_index = 0
     found = False

@@ -23,7 +23,7 @@ from config import (
 from utils import (
     extract_branch_name,
     extract_port_from_file,
-    extract_port_from_query_result,
+    extract_pid_from_query_result,
     get_system_pid_query,
     is_python_2
 )
@@ -105,7 +105,7 @@ def get_pid_from_port(port):
     ps = subprocess.Popen(query, stdout=subprocess.PIPE)
     out = subprocess.check_output(['grep', port], stdin=ps.stdout)
     content = out.decode( UTF8 )
-    pid = extract_port_from_query_result(content)
+    pid = extract_pid_from_query_result(content)
     return pid
 
 
