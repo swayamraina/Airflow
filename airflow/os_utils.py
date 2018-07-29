@@ -9,7 +9,7 @@ import subprocess
 import os
 
 
-from config import (
+from airflow.config import (
     INSTANCES,
     INSTANCE_DIRS,
     INSTANCE_LOG_DIRS,
@@ -20,7 +20,7 @@ from config import (
     HEARTBEAT_API
 )
 
-from utils import (
+from airflow.utils import (
     extract_branch_name,
     extract_port_from_file,
     extract_pid_from_query_result,
@@ -28,7 +28,7 @@ from utils import (
     is_python_2
 )
 
-from utils import (
+from airflow.utils import (
     ANGULAR_START,
     ANGULAR_END,
     FORWARD_SLASH,
@@ -36,7 +36,7 @@ from utils import (
     EQUALS
 )
 
-from os_commands import (
+from airflow.os_commands import (
     PRINT_LOGS,
     GIT_STASH,
     GIT_CHECKOUT,

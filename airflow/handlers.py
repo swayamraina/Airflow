@@ -8,7 +8,7 @@
 
 import argparse
 
-from os_utils import (
+from airflow.os_utils import (
     get_instance_dir,
     get_instance_log_dir,
     get_git_branch_name,
@@ -22,16 +22,16 @@ from os_utils import (
     deploy_branch
 )
 
-from os_commands import (
+from airflow.os_commands import (
     GIT_BRANCH_FILE_PATH,
     GIT_LOG_FILE_PATH
 )
 
-from config import (
+from airflow.config import (
     SERVER_PORT_FILEPATH
 )
 
-from utils import (
+from airflow.utils import (
     FORWARD_SLASH
 )
 

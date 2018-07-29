@@ -9,7 +9,7 @@
 import sys
 import subprocess
 
-from os_commands import (
+from airflow.os_commands import (
     MAC_PID_SEARCH_QUERY,
     LINUX_PID_SEARCH_QUERY
 )

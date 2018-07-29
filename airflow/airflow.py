@@ -1,10 +1,13 @@
+
+# This file contains all the 'airflow' CLI parser
+#
 # @author  Swayam Raina
 
 import argparse
 import sys
 
 
-from handlers import (
+from airflow.handlers import (
     heartbeat_handler,
     start_handler,
     stop_handler,
@@ -14,7 +17,7 @@ from handlers import (
     deploy_handler
 )
 
-from commands import (
+from airflow.commands import (
     SERVER_START,
     SERVER_STOP,
     SERVER_RESTART,
@@ -24,7 +27,7 @@ from commands import (
     DEPLOY
 )
 
-from commands import (
+from airflow.commands import (
     ALIAS_SERVER_START,
     ALIAS_SERVER_STOP,
     ALIAS_SERVER_RESTART,
@@ -34,7 +37,7 @@ from commands import (
     ALIAS_DEPLOY
 )
 
-from utils import (
+from airflow.utils import (
     create_parser
 )
 
