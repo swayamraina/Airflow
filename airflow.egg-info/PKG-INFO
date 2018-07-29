@@ -1,0 +1,15 @@
+Metadata-Version: 2.1
+Name: airflow
+Version: 0.0.1
+Summary: A CLI for server utilities
+Home-page: https://github.com/swayamraina/airflow
+Author: Swayam Raina
+Author-email: swayamraina@gmail.com
+License: UNKNOWN
+Description: # airflow
+        A simple CLI for basic server commands
+        
+Platform: UNKNOWN
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Description-Content-Type: text/markdown
