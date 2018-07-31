@@ -55,7 +55,7 @@ def get_machine_details():
     is a linux machine or not.
 '''
 def is_linux_machine(name):
-    return name == 'Linux'
+    return name.strip() == 'Linux'
 
 
 '''
@@ -75,15 +75,11 @@ def get_system_pid_query(port):
 '''
 def extract_pid_from_query_result(content):
     machine_type = get_machine_details()
-    start_index = 0
-    found = False
     if is_linux_machine(machine_type):
-        for i in range(len(content)):
-            if not found and content[i].isnumeric():
-                start_index = i
-                found = True
-            elif found and not content[i].isnumeric():
-                return content[ start_index : i ]
+        end_index = content.find( FORWARD_SLASH )
+        for i in reversed(range(end_index)):
+            if not unicode(content[i]).isnumeric():
+                return content[ i+1 : end_index ]
     # handling for MacOS
     start_index = content.find( SPACE )
     content = content[start_index+1 : ]
