@@ -1,21 +1,25 @@
 #!/usr/bin/env python
 
+
 import sys
 import re
 
-commit_regex = '\[#[0-9]+\] : [a-zA-Z]+\n[a-zA-Z ]+'
+commit_regex = '\[#[0-9]+\] : [a-zA-Z ]+(\n[a-zA-Z 0-9.])+'
 
 error_message = "\
 Aborting commit. Please ensure your commit message meets the standard requirement. \n\n \
-    [#reference_id] : commit message \n \
+    [#<reference_id>] : <commit message> \n \
+    <detailed commit message> \n\n \
     Sample - \n \
     [#1234] : My first commit \n \
     This is my first commit to the repository\
 "
 
 
-commit_msg = sys.argv[1]
+commit_msg_file_path = sys.argv[1]
 
-if not re.match(commit_regex, commit_msg):
-    print(error_message)
-    sys.exit(1)
+with open(commit_msg_file_path, 'r') as file:
+    content = file.read()
+    if re.match(commit_regex, content) == None:
+        print(error_message)
+        sys.exit(1)
