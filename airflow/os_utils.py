@@ -40,7 +40,9 @@ from airflow.os_commands import (
     PRINT_LOGS,
     GIT_STASH,
     GIT_CHECKOUT,
-    GIT_POP
+    GIT_POP,
+    SERVER_STARTUP_QUERY,
+    SERVER_URL
 )
 
 
@@ -141,9 +143,7 @@ def display_logs(path):
     OS utility to start a server instance.
 '''
 def start_server(path):
-    subprocess.check_output(['nohup', 'gradle', '-p', path, '-q', GRADLE_TASK, 
-                             '-Denv={0}'.format( ENVIRONMENT ), 
-                             '-Djmxhost={0}'.format( MACHINE_IP ), '&'])
+    os.system(SERVER_STARTUP_QUERY.format( path, GRADLE_TASK, ENVIRONMENT, MACHINE_IP ))
 
 
 '''
@@ -151,8 +151,8 @@ def start_server(path):
     is 'up' or not.
 '''
 def pulse_check(port):
+    request_url = SERVER_URL.format(MACHINE_IP, port, HEARTBEAT_API)
     try:
-        request_url = 'http//{0}:{1}/{2}'.format(MACHINE_IP, port, HEARTBEAT_API)
         if is_python_2():
             import urllib
             response = urllib.urlopen(request_url).read()
