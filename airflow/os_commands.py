@@ -25,4 +25,4 @@ MAC_PID_SEARCH_QUERY = ['lsof', '-i', 'tcp:{0}']
 PRINT_LOGS = 'tail -f {0}'
 
 SERVER_STARTUP_QUERY = 'cd {0}; nohup gradle -p {0} -q {1} -Denv={2} -Djmxhost={3} &'
-SERVER_URL = 'http://{0}:{1}/{2}'
+HEARTBEAT_API_XHR = 'curl -X GET {0}:{1}{2}'
