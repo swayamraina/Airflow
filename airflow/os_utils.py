@@ -42,7 +42,7 @@ from airflow.os_commands import (
     GIT_CHECKOUT,
     GIT_POP,
     SERVER_STARTUP_QUERY,
-    SERVER_URL
+    HEARTBEAT_API_XHR
 )
 
 
@@ -151,17 +151,8 @@ def start_server(path):
     is 'up' or not.
 '''
 def pulse_check(port):
-    request_url = SERVER_URL.format(MACHINE_IP, port, HEARTBEAT_API)
-    try:
-        if is_python_2():
-            import urllib
-            response = urllib.urlopen(request_url).read()
-        else:
-            import urllib.request
-            response = urllib.request.urlopen(request_url).read()
-        print(response)
-    except Exception as e:
-        print(e)
+    xhr = HEARTBEAT_API_XHR.format(MACHINE_IP, port, HEARTBEAT_API)
+    subprocess.call(xhr, shell=True)
 
 
 '''
