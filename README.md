@@ -3,7 +3,10 @@ A simple CLI for basic server commands
 
 
 # SetUp
-Add `<INSTALLATION_PATH>/Airflow/air` to
+- open `airflow/config.py` and set up your server instance
+- Add `<INSTALLATION_PATH>/Airflow/air` to
   - MAC   :  ~/.bash_profile
-  - LINUX :  ~/.bashrc
-  
+  - LINUX :  ~/.bashrc 
+- Run 
+  - MAC : `source ~/.bash_profile`
+  - LINUX : `source ~/.bashrc`
